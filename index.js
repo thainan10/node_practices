@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
@@ -15,9 +16,10 @@ app.listen(port, (err) => {
   console.log(`server is listening on ${port}`);
 });
 
+app.use(bodyParser.json());
+
 app.post('/users', function(req, res, next) {
   const user = req.body;
-  console.log('teste: ', req);
 
   pg.connect(conString, function (err, client, done) {
     if (err) {
